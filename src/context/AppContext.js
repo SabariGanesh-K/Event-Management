@@ -85,7 +85,7 @@ const [RegisterError, setRegisterError] = useState(false)
     }
   };
 
-  const addmember = async(name,regno,mail,games,pass) =>{
+  const addmember = async(name,mail,games,pass) =>{
     await setDoc(doc(db,"users",mail),{
       name:name,
       games:games,
@@ -155,6 +155,6 @@ const [RegisterError, setRegisterError] = useState(false)
     },[user, loading]);
   
     return(
-        <FireBaseContext.Provider value = {{loggedIn,signInWithGoogle,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
+        <FireBaseContext.Provider value = {{loggedIn,signInWithGoogle,addmember,scanGame,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
     )
 }

@@ -1,24 +1,65 @@
-import React,{useState} from 'react'
-import { QrReader } from 'react-qr-reader';
+import React,{useContext, useState} from 'react'
+import "./Styles.css";
+import QrReader from "react-qr-reader";
+import { FireBaseContext } from '../context/AppContext';
 export const Admins = () => {
-  const [data, setData] = useState('No result');
+  const [selected, setSelected] = useState("environment");
+  const [startScan, setStartScan] = useState(false);
+  const [loadingScan, setLoadingScan] = useState(false);
+  const [data, setData] = useState("");
+  const {scanGame} = useContext(FireBaseContext)
+  const handleConfirm = async() =>{
+    await scanGame("k.sabarii.ganesh4.0@gmail.com")
+  }
+const handleScan = async (scanData) => {
+  setLoadingScan(true);
+  console.log(`loaded data data`, scanData);
+  if (scanData && scanData !== "") {
+    console.log(`loaded >>>`, scanData);
+    setData(scanData);
+    setStartScan(false);
+    setLoadingScan(false);
+    // setPrecScan(scanData);
+  }
+};
+const handleError = (err) => {
+  console.error(err)
+};
   return (
-    <div>
+   <div className='ScanApp'>
+   
 
-<QrReader
-        onResult={(result, error) => {
-          if (!!result) {
-            setData(result?.text);
-          }
-
-          if (!!error) {
-            console.info(error);
-          }
+      <button
+        onClick={() => {
+          setStartScan(!startScan);
         }}
-        style={{ width: '100%' }}
-      />
+      >
+        {startScan ? "Stop Scan" : "Start Scan"}
+      </button>
+      {startScan && (
+        <>
+          <select onChange={(e) => setSelected(e.target.value)}>
+            <option value={"environment"}>Back Camera</option>
+            <option value={"user"}>Front Camera</option>
+          </select>
+          <QrReader
+            facingMode={selected}
+            delay={1000}
+            onError={handleError}
+            onScan={handleScan}
+            // chooseDeviceId={()=>selected}
+            style={{ width: "300px" }}
+          />
+        </>
+      )}
+      {loadingScan && <p>Loading</p>}
+      {data!="" && <p>{data}</p> }
+      {data !== "" &&  <button onClick={handleConfirm} >Confirm</button> }
+      </div>
+    
+  );
 
-
-    </div>
-  )
+   
+  
+      
 }
