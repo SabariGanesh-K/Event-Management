@@ -56,7 +56,7 @@ const handleError = (err) => {
      
       {startScan && (
         <>
-          {/* <select onChange={(e) => setSelected(e.target.value)}>
+          <select onChange={(e) => setSelected(e.target.value)}>
             <option value={"environment"}>Back Camera</option>
             <option value={"user"}>Front Camera</option>
           </select>
@@ -67,7 +67,7 @@ const handleError = (err) => {
             onScan={handleScan}
             // chooseDeviceId={()=>selected}
             style={{ width: "300px" }}
-          /> */}
+          />
           <div>scanning</div>
         </>
       )}
