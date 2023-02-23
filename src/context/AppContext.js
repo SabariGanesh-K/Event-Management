@@ -36,7 +36,8 @@ export const FirebaseProvider = ({children})=>{
     const [usermail,setusermail] = useState("");
    const [UserData, setUserData] = useState([])
     const [isAdmin,setIsAdmin] = useState(false);
- const [NoBalanceError, setNoBalanceError] = useState(false)
+ const [NoGameBalanceError, setNoGameBalanceError] = useState(false)
+ const [NoCMBalanceError, setNoCMBalanceError] = useState(false)
     const compName = "Valley"
     const firebaseConfig = {
         apiKey: "AIzaSyDN3caVo0pefOV6I8pOfp8V8hMV3PGDhWA",
@@ -85,7 +86,7 @@ const [RegisterError, setRegisterError] = useState(false)
     }
   };
 
-  const addmember = async(name,mail,games,pass) =>{
+  const addmember = async(name,mail,games,cm,pass) =>{
     await setDoc(doc(db,"users",mail),{
       name:name,
       games:games,
@@ -111,14 +112,38 @@ const [RegisterError, setRegisterError] = useState(false)
         );
       }
       else{
-        setNoBalanceError(true)
+        setNoGameBalanceError(true)
       }
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
-      setNoBalanceError(true)
+      setNoGameBalanceError(true)
     }
     
+  }
+
+  const scanCosplay = async(mail) =>{
+    const docRef = doc(db, "users",mail);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      if(docSnap.data().cm!=0){
+        await setDoc(
+          docRef,
+          {
+            cm: parseInt(docSnap.data().cm) - 1,
+          },
+          { merge: true }
+        );
+      }
+      else{
+        setNoGameBalanceError(true)
+      }
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+      setNoGameBalanceError(true)
+    }
   }
   
   
