@@ -92,7 +92,19 @@ const [RegisterError, setRegisterError] = useState(false)
       games:games,
       pass:pass,
       mail:mail,
-      admin:false
+      admin:false,
+      cm:cm
+      
+    })
+    
+  }
+  const addAdmin = async(name,mail) =>{
+    await setDoc(doc(db,"users",mail),{
+      name:name,
+  
+      mail:mail,
+      admin:true,
+      
       
     })
     
@@ -180,6 +192,6 @@ const [RegisterError, setRegisterError] = useState(false)
     },[user, loading]);
   
     return(
-        <FireBaseContext.Provider value = {{loggedIn,signInWithGoogle,addmember,scanGame,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
+        <FireBaseContext.Provider value = {{loggedIn,signInWithGoogle,addmember,addAdmin,scanCosplay,scanGame,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
     )
 }
