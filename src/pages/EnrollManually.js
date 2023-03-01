@@ -15,12 +15,12 @@ export const EnrollManually = () => {
         setloadingGameDeduct(true)
        let stats =  await scanGame(email)
        setss(stats)
-        if(NoGameBalanceError || !ss ){
-          setEntityClipOpen(true);
+        if(!ss ){
+        //   setEntityClipOpen(true);
         }
         else{
           setEmail("")
-          setEntityClip2Open(true);
+        //   setEntityClip2Open(true);
         }
         setloadingGameDeduct(false)
       }

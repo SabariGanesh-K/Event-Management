@@ -123,12 +123,14 @@ const [RegisterError, setRegisterError] = useState(false)
       }
       else{
         setNoGameBalanceError(true)
+        alert("User has no balance")
         return false
       }
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
       setNoGameBalanceError(true)
+      alert("Invalid mail ID")
       return false
     }
     
