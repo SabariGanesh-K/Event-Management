@@ -123,11 +123,13 @@ const [RegisterError, setRegisterError] = useState(false)
       }
       else{
         setNoGameBalanceError(true)
+        return false
       }
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
       setNoGameBalanceError(true)
+      return false
     }
     
   }
@@ -145,6 +147,7 @@ const [RegisterError, setRegisterError] = useState(false)
           },
           { merge: true }
         );
+        setNoGameBalanceError(false)
       }
       else{
         setNoGameBalanceError(true)

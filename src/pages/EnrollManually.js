@@ -10,10 +10,12 @@ export const EnrollManually = () => {
   const [loadingGameDeduct, setloadingGameDeduct] = useState(false)
   const [EntityClipOpen, setEntityClipOpen] = useState(false);
   const [EntityClip2Open, setEntityClip2Open] = useState(false);
+  const [ss, setss] = useState(false)
     const handleGameConfirm = async() =>{
         setloadingGameDeduct(true)
-        await scanGame(email)
-        if(NoGameBalanceError){
+       let stats =  await scanGame(email)
+       setss(stats)
+        if(NoGameBalanceError || !ss ){
           setEntityClipOpen(true);
         }
         else{
