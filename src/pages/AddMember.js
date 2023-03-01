@@ -18,7 +18,7 @@ export const AddMember = () => {
   }
     const dat = {0:{games:4,cm:0},1:{games:3,cm:1},2:{games:2,cm:2}}
     const handleAdd = async() =>{
-      await addmember(name,email,dat[SelectedPass].games,dat[SelectedPass].cm,SelectedPass.toString())
+      await addmember(name,email)
 
       console.log()
       setEmail("")
@@ -61,7 +61,7 @@ export const AddMember = () => {
         />
       
 
-<div className='flex flex-row justify-center flex-wrap pt-8'>
+{/* <div className='flex flex-row justify-center flex-wrap pt-8'>
 <div   onClick={()=>setSelectedPass(0)}  class={`bg-white p-10  ml-2 rounded-lg shadow-md border border-2 ${ SelectedPass===0? `border-4 border-violet-600`:`border-gray-600`} cursor-pointer`}>
     <h1 class="text-xl font-bold">PASS 1</h1>
     <div class="mt-4 mb-10">
@@ -111,7 +111,7 @@ export const AddMember = () => {
     </h2>
     <button class="bg-orange-400 py-3 px-8 mt-4 rounded text-sm font-semibold hover:bg-opacity-75">Go to lesson</button>
   </div>
-  </div>
+  </div> */}
   <br/><br/>
 {( name && email) ?
   <a href="#_" class="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-indigo-600 text-indigo-600 text-white">

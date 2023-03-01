@@ -86,14 +86,11 @@ const [RegisterError, setRegisterError] = useState(false)
     }
   };
 
-  const addmember = async(name,mail,games,cm,pass) =>{
+  const addmember = async(name,mail) =>{
     await setDoc(doc(db,"users",mail),{
       name:name,
-      games:games,
-      pass:pass,
-      mail:mail,
-      admin:false,
-      cm:cm
+      games:4,
+      mail:mail
       
     })
     
@@ -122,6 +119,7 @@ const [RegisterError, setRegisterError] = useState(false)
           },
           { merge: true }
         );
+        setNoGameBalanceError(false)
       }
       else{
         setNoGameBalanceError(true)
@@ -192,6 +190,6 @@ const [RegisterError, setRegisterError] = useState(false)
     },[user, loading]);
   
     return(
-        <FireBaseContext.Provider value = {{loggedIn,signInWithGoogle,addmember,addAdmin,scanCosplay,scanGame,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
+        <FireBaseContext.Provider value = {{loggedIn,signInWithGoogle,addmember,addAdmin,NoGameBalanceError,scanCosplay,scanGame,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
     )
 }

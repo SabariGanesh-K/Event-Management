@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { FirebaseProvider } from './context/AppContext';
 import { AddMember } from './pages/AddMember';
 import { AddAdmin } from './pages/AddAdmin';
+import { EnrollManually } from './pages/EnrollManually';
 function App() {
   return (
     <div className="App">
@@ -14,6 +15,8 @@ function App() {
       <Route path = "/home" element={<Home/>} />
       <Route path = "/add" element = {<AddMember/>}/>
       <Route path = "/addadmin" element = {<AddAdmin/>}/>
+      <Route path = "/enroll" element = {<EnrollManually/>}/>
+      <Route path = "*" element={<Home/>} />
 
      </Routes>
      </FirebaseProvider>

@@ -7,7 +7,7 @@ export const Participants = () => {
   return (
     <div className='bg-white min-h-screen' >
       <br/><br/>
-    <div className='text-black font-bold text-3xl' >you have {UserData.games} games left and {!UserData.cm? "0": UserData.cm} Cosplay/Movie Marathon left </div>
+    <div className='text-black font-bold text-3xl' >you have {UserData.games} games left  </div>
   <br/>
     <div style={{ height: "auto", margin: "0 auto", maxWidth: 256, width: "100%" }}>
     <QRCode
