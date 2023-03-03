@@ -135,6 +135,35 @@ const [RegisterError, setRegisterError] = useState(false)
     }
     
   }
+  const scanTeam = async(mail) =>{
+    const docRef = doc(db, "users",mail);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+      if(docSnap.data().games!=0  && docSnap.data().games>=4 ){
+        await setDoc(
+          docRef,
+          {
+            games: parseInt(docSnap.data().games) - 1,
+          },
+          { merge: true }
+        );
+        setNoGameBalanceError(false)
+      }
+      else{
+        setNoGameBalanceError(true)
+        alert("User has no team balance")
+        return false
+      }
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+      setNoGameBalanceError(true)
+      alert("Invalid mail ID")
+      return false
+    }
+    
+  }
 
   const scanCosplay = async(mail) =>{
     const docRef = doc(db, "users",mail);
@@ -195,6 +224,6 @@ const [RegisterError, setRegisterError] = useState(false)
     },[user, loading]);
   
     return(
-        <FireBaseContext.Provider value = {{loggedIn,signInWithGoogle,addmember,addAdmin,NoGameBalanceError,scanCosplay,scanGame,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
+        <FireBaseContext.Provider value = {{loggedIn,scanTeam,signInWithGoogle,addmember,addAdmin,NoGameBalanceError,scanCosplay,scanGame,RegisterError,db,UserData}} >{children}</FireBaseContext.Provider>
     )
 }

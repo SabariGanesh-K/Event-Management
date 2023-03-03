@@ -9,7 +9,7 @@ export const Admins = () => {
   const [startScan, setStartScan] = useState(false);
   const [loadingScan, setLoadingScan] = useState(false);
   const [data, setData] = useState("");
-  const {scanGame,UserData,scanCosplay,NoGameBalanceError} = useContext(FireBaseContext)
+  const {scanGame,UserData,scanTeam,scanCosplay,NoGameBalanceError} = useContext(FireBaseContext)
   const [loadingGameDeduct, setloadingGameDeduct] = useState(false)
   const [EntityClipOpen, setEntityClipOpen] = useState(false);
   const [EntityClip2Open, setEntityClip2Open] = useState(false);
@@ -17,6 +17,18 @@ export const Admins = () => {
   const handleGameConfirm = async() =>{
     setloadingGameDeduct(true)
     await scanGame(data)
+    if(NoGameBalanceError){
+      setEntityClipOpen(true);
+    }
+    else{
+      setData("")
+      setEntityClip2Open(true);
+    }
+
+  }
+  const handleTeamGameConfirm = async() =>{
+    setloadingGameDeduct(true)
+    await scanTeam(data)
     if(NoGameBalanceError){
       setEntityClipOpen(true);
     }
@@ -40,6 +52,7 @@ const handleScan = async (scanData) => {
     // setPrecScan(scanData);
   }
 };
+
 const handleEntityClipClose = () =>{
   setEntityClipOpen(false);
 }
@@ -122,6 +135,10 @@ const handleError = (err) => {
       {data !== "" && UserData.games!=0 &&    <a href="#_" class="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-indigo-600 text-indigo-600 text-white">
 <span class="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-indigo-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
 <span onClick={handleGameConfirm} class="relative text-indigo-600 transition duration-300 group-hover:text-white ease">Enroll Game</span>
+</a>}
+{data !== "" && UserData.games!=0 &&    <a href="#_" class="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-pointer border-2 font-medium border-indigo-600 text-indigo-600 text-white">
+<span class="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-indigo-600 top-1/2 group-hover:h-64 group-hover:-translate-y-32 ease"></span>
+<span onClick={handleTeamGameConfirm} class="relative text-indigo-600 transition duration-300 group-hover:text-white ease">Enroll Team</span>
 </a>}
       {data !== "" && UserData.games==0 &&   <a href="#_" class="rounded-md px-3.5 py-2 m-1 overflow-hidden relative group cursor-not-allowed border-2 font-medium border-gray-600 text-gray-600 text-white">
 <span class="absolute w-64 h-0 transition-all duration-300 origin-center rotate-45 -translate-x-20 bg-gray-600 top-1/2 "></span>
