@@ -135,16 +135,16 @@ const [RegisterError, setRegisterError] = useState(false)
     }
     
   }
-  const scanTeam = async(mail) =>{
+  const scanTeam = async(mail,count) =>{
     const docRef = doc(db, "users",mail);
     const docSnap = await getDoc(docRef);
     
     if (docSnap.exists()) {
-      if(docSnap.data().games!=0  && docSnap.data().games>=4 ){
+      if(docSnap.data().games!=0  && docSnap.data().games>=count ){
         await setDoc(
           docRef,
           {
-            games: parseInt(docSnap.data().games) - 1,
+            games: parseInt(docSnap.data().games) - count,
           },
           { merge: true }
         );

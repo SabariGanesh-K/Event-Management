@@ -5,6 +5,7 @@ import { FireBaseContext } from '../context/AppContext';
 
 export const EnrollManually = () => {
   const {scanGame,UserData,scanCosplay,NoGameBalanceError,scanTeam} = useContext(FireBaseContext)
+  const [manualMwmbers, setManualMwmbers] = useState(0)
 
     const [email, setEmail] = useState("")
   const [loadingGameDeduct, setloadingGameDeduct] = useState(false)
@@ -33,7 +34,7 @@ export const EnrollManually = () => {
       }
       const handleTeamGameConfirm = async() =>{
         setloadingGameDeduct(true)
-        await scanTeam(email)
+        await scanTeam(email,manualMwmbers)
         if(NoGameBalanceError){
           setEntityClipOpen(true);
         }
@@ -68,6 +69,16 @@ className='w-[92%]'
           onChange={(e)=>setEmail(e.target.value)}
           label=" email "
           placeholder="email"
+          multiline
+          variant="standard"
+        />
+        <TextField
+className='w-[92%]'
+          id="standard-textarea"
+          value={manualMwmbers}
+          onChange={(e)=>setManualMwmbers(e.target.value)}
+          label=" count "
+          placeholder="count"
           multiline
           variant="standard"
         />
