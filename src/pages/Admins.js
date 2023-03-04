@@ -17,7 +17,7 @@ export const Admins = () => {
 
   const handleGameConfirm = async() =>{
     setloadingGameDeduct(true)
-    await scanGame(data)
+    await scanGame(data.toLowerCase())
     if(NoGameBalanceError){
       setEntityClipOpen(true);
     }
@@ -29,7 +29,7 @@ export const Admins = () => {
   }
   const handleTeamGameConfirm = async() =>{
     setloadingGameDeduct(true)
-    await scanTeam(data,manualMwmbers)
+    await scanTeam(data.toLowerCase(),manualMwmbers)
     if(NoGameBalanceError){
       setEntityClipOpen(true);
     }

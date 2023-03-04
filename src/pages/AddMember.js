@@ -18,7 +18,7 @@ export const AddMember = () => {
   }
     const dat = {0:{games:4,cm:0},1:{games:3,cm:1},2:{games:2,cm:2}}
     const handleAdd = async() =>{
-      await addmember(name,email)
+      await addmember(name,email.toLowerCase())
 
       console.log()
       setEmail("")

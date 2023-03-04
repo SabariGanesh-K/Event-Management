@@ -14,7 +14,7 @@ export const EnrollManually = () => {
   const [ss, setss] = useState(false)
     const handleGameConfirm = async() =>{
         setloadingGameDeduct(true)
-       let stats =  await scanGame(email)
+       let stats =  await scanGame(email.toLowerCase())
        setss(stats)
         if(!ss ){
         //   setEntityClipOpen(true);
